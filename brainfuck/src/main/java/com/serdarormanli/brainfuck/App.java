@@ -1,13 +1,11 @@
 package com.serdarormanli.brainfuck;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
+import com.serdarormanli.brainfuck.interpreter.InputInterpreter;
+import com.serdarormanli.brainfuck.interpreter.Interpreter;
+
+public class App {
+	public static void main(String[] args) {
+		Interpreter in = new InputInterpreter("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.");
+		in.interpret();
+	}
 }
