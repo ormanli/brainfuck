@@ -14,8 +14,7 @@ public class InputCommand {
 		return commands;
 	}
 
-	public char getCurrentCommand() {
+	public Character getCurrentCommand() {
 		return commands.get(index);
 	}
-
 }

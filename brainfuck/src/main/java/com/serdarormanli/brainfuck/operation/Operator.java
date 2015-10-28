@@ -12,35 +12,35 @@ import com.serdarormanli.brainfuck.data.InputData;
 public enum Operator {
 
 	INCREMENT('+', (data, command) -> {
-		data.data[data.index]++;
+		data.incrementData();
 		command.index++;
 	}), //
 	DECREMENT('-', (data, command) -> {
-		data.data[data.index]--;
+		data.decrementData();
 		command.index++;
 	}), //
 	RIGHT('>', (data, command) -> {
-		data.index++;
+		data.incrementIndex();
 		command.index++;
 	}), //
 	LEFT('<', (data, command) -> {
-		data.index--;
+		data.decrementIndex();
 		command.index++;
 	}), //
 	DOT('.', (data, command) -> {
-		System.out.print((char) data.data[data.index]);
+		System.out.print((char) data.getCurrentData());
 		command.index++;
 	}), //
 	COMMA(',', (data, command) -> {
 		try (Scanner s = new Scanner(System.in)) {
-			data.data[data.index] = s.next().charAt(0);
+			data.setCurrentData(s.next().charAt(0));
 		}
 		command.index++;
 
 	}), //
 	LEFT_BRACKET('[', (data, command) -> {
-		if (data.data[data.index] == 0) {
-			while (!command.getCommands().get(command.index).equals(Character.valueOf(']'))) {
+		if (data.getCurrentData() == 0) {
+			while (!command.getCurrentCommand().equals(Character.valueOf(']'))) {
 				command.index++;
 			}
 		} else {
@@ -48,27 +48,27 @@ public enum Operator {
 		}
 	}), //
 	RIGHT_BRACKET(']', (data, command) -> {
-		if (data.data[data.index] == 0) {
+		if (data.getCurrentData() == 0) {
 			command.index++;
 		} else {
-			while (!command.getCommands().get(command.index).equals(Character.valueOf('['))) {
+			while (!command.getCurrentCommand().equals(Character.valueOf('['))) {
 				command.index--;
 			}
 		}
 	});
 
 	private Operation operation;
-	private char symbol;
+	private Character symbol;
 
 	public Operation getOperation() {
 		return operation;
 	}
 
-	public char getSymbol() {
+	public Character getSymbol() {
 		return symbol;
 	}
 
-	private Operator(char symbol, Operation operation) {
+	private Operator(Character symbol, Operation operation) {
 		this.operation = operation;
 		this.symbol = symbol;
 	}
@@ -84,6 +84,6 @@ public enum Operator {
 	}
 
 	public static void apply(InputData data, InputCommand commands) {
-		get(commands.getCommands().get(commands.index)).operation.apply(data, commands);
+		get(commands.getCurrentCommand()).operation.apply(data, commands);
 	}
 }
