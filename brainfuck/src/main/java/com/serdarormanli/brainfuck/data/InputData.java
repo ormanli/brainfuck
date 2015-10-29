@@ -1,7 +1,7 @@
 package com.serdarormanli.brainfuck.data;
 
 public class InputData {
-	private static final int LENGTH = 10;
+	private static final int LENGTH = 30000;
 	private int index = 1;
 	private int[] data = new int[index + LENGTH];
 

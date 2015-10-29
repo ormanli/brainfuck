@@ -75,15 +75,11 @@ public enum Operator {
 
 	private static final Map<Character, Operator> lookup = EnumSet.allOf(Operator.class).stream().collect(Collectors.toMap(Operator::getSymbol, Function.identity()));
 
-	public static Operator get(Character symbol) {
-		return lookup.get(symbol);
-	}
-
 	public static boolean isSymbol(Character symbol) {
 		return lookup.containsKey(symbol);
 	}
 
 	public static void apply(InputData data, InputCommand commands) {
-		get(commands.getCurrentCommand()).operation.apply(data, commands);
+		lookup.get(commands.getCurrentCommand()).operation.apply(data, commands);
 	}
 }

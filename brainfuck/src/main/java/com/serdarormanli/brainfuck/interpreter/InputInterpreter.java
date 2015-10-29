@@ -9,5 +9,4 @@ public class InputInterpreter extends AbstractInterpreter {
 	public InputInterpreter(String input) {
 		super(input.chars().mapToObj(c -> new Character((char) c)).filter(i -> Operator.isSymbol(i)).collect(Collectors.toList()));
 	}
-
 }
